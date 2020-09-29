@@ -5,6 +5,7 @@ public class EmployeeWage implements ICalcEmpWage{
 		public static final int IS_FULL_TIME = 2;
 
                 private ArrayList<CompanyEmpWage> companyEmpWageArrayList;
+                private Map<String, CompanyEmpWage> cMap;
 
                 public EmployeeWage(){
                    companyEmpWageArrayList = new ArrayList<>();
@@ -14,6 +15,7 @@ public class EmployeeWage implements ICalcEmpWage{
                   CompanyEmpWage ce = new CompanyEmpWage(company, empRatePerHr, noOfDays, maxHrsPerMonth);
                   companyEmpWageArrayList.add(ce);
                 }
+
                 public void calcEmpWage(){
                    for(int i = 0; i < companyEmpWageArrayList.size(); i++) {
                         CompanyEmpWage ce = companyEmpWageArrayList.get(i);
@@ -22,7 +24,7 @@ public class EmployeeWage implements ICalcEmpWage{
 		    }
         	}
                 private int calcEmpWage(CompanyEmpWage ce){
-			int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+			int i=0, empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
 			while(totalEmpHrs <= ce.maxHrsPerMonth && totalWorkingDays < ce.noOfDays){
 				totalWorkingDays++;
 				int check = (int) Math.floor(Math.random() * 10) % 3; 
@@ -36,13 +38,15 @@ public class EmployeeWage implements ICalcEmpWage{
 					default:
 						empHrs = 0;
 				}
+                                ce.dailyEmpWage.add(empHrs * ce.empRatePerHr);
 				totalEmpHrs += empHrs;
-				System.out.println("Days: " +  totalWorkingDays + " EmpHours: " + empHrs);
+				System.out.println("Days: " +  totalWorkingDays + " EmpHours: " + empHrs + " Daily wage " + ce.dailyEmpWage.get(i));
+                                i++;
 			}
 		        return totalEmpHrs * ce.empRatePerHr;
 		}
 
-                public static void main(String[] args){
+                public static void main(String[] args){ 
                      EmployeeWage emp = new EmployeeWage();
                      emp.addCompanyEmpWage("Airtel",20, 20, 100);
                      emp.addCompanyEmpWage("Jio",20, 18, 90);
