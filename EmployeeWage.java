@@ -1,4 +1,4 @@
-public class EmployeeWage{
+public class EmployeeWage implements ICalcEmpWage{
 		public static final int IS_PART_TIME = 1;
 		public static final int IS_FULL_TIME = 2;
 
@@ -9,11 +9,11 @@ public class EmployeeWage{
                 companyEmpWageArray = new CompanyEmpWage[5];
                 }
                 
-                private void addCompanyEmpWage(String company, int empRatePerHr, int noOfDays, int maxHrsPerMonth){
+                public void addCompanyEmpWage(String company, int empRatePerHr, int noOfDays, int maxHrsPerMonth){
                   companyEmpWageArray[noOfCompany] = new CompanyEmpWage(company, empRatePerHr, noOfDays, maxHrsPerMonth);
                   noOfCompany++;
                 }
-                private void calcEmpWage(){
+                public void calcEmpWage(){
                    for(int i = 0; i < noOfCompany; i++) {
 			companyEmpWageArray[i].setTotalWage(this.calcEmpWage(companyEmpWageArray[i]));
 			System.out.println(companyEmpWageArray[i]);
