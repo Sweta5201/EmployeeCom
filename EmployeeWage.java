@@ -1,15 +1,15 @@
-class EmployeeWage{
-public static void main(String[] args){
-int is_present = 1;
-int rate_per_hour = 20;
-int emp_hrs = 0;
-int emp_wage = 0;
-int check =(int) Math.floor(Math.random() *10) % 2;
-if(check == is_present)
-emp_hrs = 8;
-else
-emp_hrs = 0;
-emp_wage = emp_hrs * rate_per_hour;
-System.out.println("Employee wage is "+emp_wage);
-}
+public class EmployeeWage{
+     public static final int IS_FULL_TIME = 1;
+     public static final int EMP_RATE_PER_HOUR = 20;
+     public static void main(String[] args){
+            int empHrs = 0;
+            int empWage = 0;
+            int check =(int) Math.floor(Math.random() *10) % 2;
+            if(check == IS_FULL_TIME)
+                  empHrs = 8;
+            else
+                  empHrs = 0;
+            empWage = empHrs * EMP_RATE_PER_HOUR;
+            System.out.println("Employee wage is "+empWage);
+       }
 }
