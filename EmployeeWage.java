@@ -1,27 +1,29 @@
+import java.util.*;
+
 public class EmployeeWage implements ICalcEmpWage{
 		public static final int IS_PART_TIME = 1;
 		public static final int IS_FULL_TIME = 2;
 
-                private int noOfCompany = 0;
-                private CompanyEmpWage[]companyEmpWageArray;
+                private ArrayList<CompanyEmpWage> companyEmpWageArrayList;
 
                 public EmployeeWage(){
-                companyEmpWageArray = new CompanyEmpWage[5];
+                   companyEmpWageArrayList = new ArrayList<>();
                 }
-                
+
                 public void addCompanyEmpWage(String company, int empRatePerHr, int noOfDays, int maxHrsPerMonth){
-                  companyEmpWageArray[noOfCompany] = new CompanyEmpWage(company, empRatePerHr, noOfDays, maxHrsPerMonth);
-                  noOfCompany++;
+                  CompanyEmpWage ce = new CompanyEmpWage(company, empRatePerHr, noOfDays, maxHrsPerMonth);
+                  companyEmpWageArrayList.add(ce);
                 }
                 public void calcEmpWage(){
-                   for(int i = 0; i < noOfCompany; i++) {
-			companyEmpWageArray[i].setTotalWage(this.calcEmpWage(companyEmpWageArray[i]));
-			System.out.println(companyEmpWageArray[i]);
+                   for(int i = 0; i < companyEmpWageArrayList.size(); i++) {
+                        CompanyEmpWage ce = companyEmpWageArrayList.get(i);
+			ce.setTotalWage(this.calcEmpWage(ce));
+			System.out.println(ce);
 		    }
         	}
-                private int calcEmpWage(CompanyEmpWage companyEmpWage){
+                private int calcEmpWage(CompanyEmpWage ce){
 			int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
-			while(totalEmpHrs <= companyEmpWage.maxHrsPerMonth && totalWorkingDays < companyEmpWage.noOfDays){
+			while(totalEmpHrs <= ce.maxHrsPerMonth && totalWorkingDays < ce.noOfDays){
 				totalWorkingDays++;
 				int check = (int) Math.floor(Math.random() * 10) % 3; 
 				switch(check){
@@ -37,7 +39,7 @@ public class EmployeeWage implements ICalcEmpWage{
 				totalEmpHrs += empHrs;
 				System.out.println("Days: " +  totalWorkingDays + " EmpHours: " + empHrs);
 			}
-		        return totalEmpHrs * companyEmpWage.empRatePerHr;
+		        return totalEmpHrs * ce.empRatePerHr;
 		}
 
                 public static void main(String[] args){
