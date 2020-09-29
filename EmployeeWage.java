@@ -9,11 +9,13 @@ public class EmployeeWage implements ICalcEmpWage{
 
                 public EmployeeWage(){
                    companyEmpWageArrayList = new ArrayList<>();
+                   cMap = new HashMap<>();
                 }
 
                 public void addCompanyEmpWage(String company, int empRatePerHr, int noOfDays, int maxHrsPerMonth){
                   CompanyEmpWage ce = new CompanyEmpWage(company, empRatePerHr, noOfDays, maxHrsPerMonth);
                   companyEmpWageArrayList.add(ce);
+                  cMap.put(company, ce);
                 }
 
                 public void calcEmpWage(){
@@ -45,12 +47,17 @@ public class EmployeeWage implements ICalcEmpWage{
 			}
 		        return totalEmpHrs * ce.empRatePerHr;
 		}
+                @Override
+                public int getTotalWage(String company){
+                  return cMap.get(company).totalWage;
+                }
 
                 public static void main(String[] args){ 
-                     EmployeeWage emp = new EmployeeWage();
+                     ICalcEmpWage emp = new EmployeeWage();
                      emp.addCompanyEmpWage("Airtel",20, 20, 100);
                      emp.addCompanyEmpWage("Jio",20, 18, 90);
                      emp.calcEmpWage();
+                     System.out.println("Total wage for Airtel company " + emp.getTotalWage("Airtel"));
                 }
 
 }

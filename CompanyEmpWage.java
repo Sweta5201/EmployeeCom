@@ -15,6 +15,7 @@ public class CompanyEmpWage {
 			this.noOfDays = noOfDays;
 			this.maxHrsPerMonth = maxHrsPerMonth;
                         dailyEmpWage = new ArrayList<>();
+                        totalWage = 0;
 		}
 
 		public void setTotalWage(int totalWage) {
